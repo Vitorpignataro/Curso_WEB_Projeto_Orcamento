@@ -1,4 +1,4 @@
-// Class despesa
+// Class responsável por criar um novo objeto de despesa
 class Despesa{
     constructor(ano, mes, dia, tipo, descricao, valor){
         this.ano = ano
@@ -9,6 +9,34 @@ class Despesa{
         this.valor = valor
     }
 }
+
+
+//Class responsável por salvar no Local Storage
+class Bd{
+
+    constructor(){
+        let id = localStorage.getItem('id')
+
+        if(id === null){
+            localStorage.setItem('id', 0)
+        }
+    }
+
+    getProximoId(){
+        let proximoId = localStorage.getItem('id')
+        return parseInt(proximoId) + 1;
+    }
+
+
+    gravar(d){
+        let id = this.getProximoId()
+
+        localStorage.setItem(id, JSON.stringify(d))
+        localStorage.setItem('id', id);
+    }
+}
+
+let bd = new Bd();
 
 
 //Função que cria um despesa
@@ -29,7 +57,12 @@ function cadastrarDespesa(){
         valor.value
     )
 
-    console.log(newDespesa);
+    bd.gravar(newDespesa);
+    
 }
+
+
+
+
 
 
