@@ -8,6 +8,18 @@ class Despesa{
         this.descricao = descricao
         this.valor = valor
     }
+
+
+    //Método que valida os dados que estão sendo criados, usamos o this[i] para acessar o valor de cada elemento
+
+    validarDados(){
+        for(let i in this){
+            if(this[i] == undefined || this[i] == '' || this[i] == null){
+                return false
+            }
+        }
+        return true
+    }
 }
 
 
@@ -56,8 +68,15 @@ function cadastrarDespesa(){
         descricao.value, 
         valor.value
     )
+    
 
-    bd.gravar(newDespesa);
+    if(newDespesa.validarDados()){
+        
+        bd.gravar(newDespesa);
+        $('#sucessoGravacao').modal('show')
+    }else{
+        $('#erroGravacao').modal('show')
+    }
     
 }
 
