@@ -73,9 +73,36 @@ function cadastrarDespesa(){
     if(newDespesa.validarDados()){
         
         bd.gravar(newDespesa);
-        $('#sucessoGravacao').modal('show')
+
+        let tittleModal = document.getElementById('title-modal-despesa')
+        tittleModal.innerHTML = 'Sucesso';
+        document.getElementById('modal-title-div').className = 'modal-header text-success'
+        
+       
+
+        let conteudoInterno = document.getElementById('modal-message')
+        conteudoInterno.innerHTML = 'Despesa cadastrada';
+        
+        let buttonModal = document.getElementById('btn-return')
+        buttonModal.innerHTML = 'Voltar';
+        buttonModal.className = 'btn btn-success';
+        $('#modalRegistraDespesa').modal('show')
+
+        
+        
+       
     }else{
-        $('#erroGravacao').modal('show')
+        let tittleModal = document.getElementById('title-modal-despesa')
+        tittleModal.innerHTML = 'Erro ao cadastrar despesa';
+        document.getElementById('modal-title-div').className = 'modal-header text-danger'
+
+        let conteudoInterno = document.getElementById('modal-message')
+        conteudoInterno.innerHTML = 'Dados inseridos incorretamente';
+        
+        let buttonModal = document.getElementById('btn-return')
+        buttonModal.innerHTML = 'Voltar e corrigir';
+        buttonModal.className = 'btn btn-danger';
+        $('#modalRegistraDespesa').modal('show')
     }
     
 }
