@@ -40,12 +40,38 @@ class Bd{
     }
 
 
+    //Função que grava todas as despesas
     gravar(d){
         let id = this.getProximoId()
 
         localStorage.setItem(id, JSON.stringify(d))
         localStorage.setItem('id', id);
     }
+
+
+    //Função que recupera todos as despesas cadastradas
+    recuperarTodosRegistros(){
+
+        let despesasListadas = Array()
+        let id = localStorage.getItem('id')
+
+        for (let i = 1; i <= id; i++) {
+            
+            let despesa = JSON.parse(localStorage.getItem(i))
+
+            if(despesa === null){
+                continue
+            }
+
+            despesasListadas.push(despesa);
+        }
+
+        return despesasListadas
+
+    }
+
+
+
 }
 
 let bd = new Bd();
@@ -105,6 +131,14 @@ function cadastrarDespesa(){
         $('#modalRegistraDespesa').modal('show')
     }
     
+}
+
+
+//Função que faz a listagem das despesas na página
+function carregaListaDespesas(){
+    let despesasLista = bd.recuperarTodosRegistros();
+
+    console.log(despesasLista)
 }
 
 
