@@ -138,7 +138,44 @@ function cadastrarDespesa(){
 function carregaListaDespesas(){
     let despesasLista = bd.recuperarTodosRegistros();
 
-    console.log(despesasLista)
+    let listagemID = document.getElementById('listagemDespesa');
+
+    //Função responsável por pegar a listagem e exibir na página
+    despesasLista.forEach(function(d){
+
+        //Insere uma linha
+        let row = listagemID.insertRow()
+
+        switch (d.tipo) {
+            case '1':
+                d.tipo = 'Alimentação'
+                break;
+            case '2':
+                d.tipo = 'Educação'
+                break;
+            case '3':
+                d.tipo = 'Lazer'
+                break;
+            case '4':
+                d.tipo = 'Saúde'
+                break;
+            case '5':
+                d.tipo = 'Transporte'
+                break;
+        
+            default:
+                break;
+        }
+
+        //Inserie TD
+        row.insertCell(0).innerHTML = `${d.dia}/${d.mes}/${d.ano}`
+        row.insertCell(1).innerHTML = d.tipo
+        row.insertCell(2).innerHTML = d.descricao
+        row.insertCell(3).innerHTML = d.valor
+
+    })
+
+
 }
 
 
