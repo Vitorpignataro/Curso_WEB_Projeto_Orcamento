@@ -63,6 +63,8 @@ class Bd{
                 continue
             }
 
+
+            despesa.id = i;
             despesasListadas.push(despesa);
         }
 
@@ -104,7 +106,9 @@ class Bd{
 
     }
 
-
+    deletar(id){
+        localStorage.removeItem(id);
+    }
 
 }
 
@@ -221,6 +225,19 @@ function carregaListaDespesas(despesas = Array(), filtro = false){
         row.insertCell(1).innerHTML = d.tipo
         row.insertCell(2).innerHTML = d.descricao
         row.insertCell(3).innerHTML = d.valor
+
+        let btn = document.createElement('button')
+        btn.className = 'btn btn-danger'
+        btn.innerHTML = '<i class="fas fa-times"></i>'
+        btn.id = `btn_id_${d.id}`
+        btn.onclick = function(){
+            let idbtn = this.id;
+            idbtn = idbtn.replace('btn_id_', '');
+            bd.deletar(idbtn)
+
+            window.location.reload()
+        }
+        row.insertCell(4).append(btn)
 
     })
 
