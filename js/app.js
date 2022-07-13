@@ -72,7 +72,37 @@ class Bd{
 
 
     pesquisar(despesas){
-        console.log(despesas)
+        let despesasFiltradas = Array()
+        despesasFiltradas = this.recuperarTodosRegistros()
+
+        console.log(despesasFiltradas);
+        if(despesas.ano != ''){
+            despesasFiltradas = despesasFiltradas.filter(d => d.ano == despesas.ano)
+        }
+
+        if(despesas.mes != ''){
+            despesasFiltradas = despesasFiltradas.filter(d => d.mes == despesas.mes)
+        }
+
+
+        if(despesas.dia != ''){
+            despesasFiltradas = despesasFiltradas.filter(d => d.dia == despesas.dia)
+        }
+
+        if(despesas.tipo != ''){
+            despesasFiltradas = despesasFiltradas.filter(d => d.tipo == despesas.tipo)
+        }
+
+        if(despesas.descricao != ''){
+            despesasFiltradas = despesasFiltradas.filter(d => d.descricao == despesas.descricao)
+        }
+
+        if(despesas.valor != ''){
+            despesasFiltradas = despesasFiltradas.filter(d => d.valor == despesas.valor)
+        }
+
+
+        console.log(despesasFiltradas);
     }
 
 
